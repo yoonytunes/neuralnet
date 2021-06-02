@@ -10,6 +10,9 @@ BNN.o : BNN.cpp BNN.h
 Matrix.o : Matrix.cpp Matrix.h
 	clang++ -c Matrix.cpp
 
+clean :
+	rm run *.o
+
 
 
 
