@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Matrix.h"
 #include <iostream>
 #include <vector>
 
@@ -28,11 +29,12 @@ class BNN {
         void initialize ();     // initialize variables;
 
         unsigned unroll (unsigned i, unsigned j, unsigned cols);
+        Matrix matmul (Matrix a, Matrix b);     // multiply two matrices
 
 
     private:
 
-        vector<vector<float>> weights_;      // inner vector is unrolled from 2D to 1D
+        vector<Matrix> weights_;      // inner vector contains matrix objects
         vector<vector<unsigned>> inputs_;    // column matrix for input stored as row vector
         vector<unsigned> layers_;            // keeps track of number of units per layer
         unsigned num_in_;                // number of inputs (with bias unit)
