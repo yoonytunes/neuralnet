@@ -28,6 +28,7 @@ class BNN {
 
         void initialize ();     // initialize variables;
 
+
         unsigned unroll (unsigned i, unsigned j, unsigned cols);
         Matrix matmul (Matrix a, Matrix b);     // multiply two matrices
 
