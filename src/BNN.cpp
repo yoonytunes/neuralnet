@@ -10,6 +10,11 @@ void BNN::set_num_in () {
     cin >> num_in;
     cout << endl;
 
+    if (num_in < 1) {
+        cout << "Must be at least 1 input, enter again: " << endl;
+        set_num_in ();
+    }
+
     num_in_ = num_in + 1;       // add bias unit
 }
 
@@ -20,6 +25,11 @@ void BNN::set_num_out() {
     cout << "Number of output units: " << endl;
     cin >> num_out;
     cout << endl;
+
+    if (num_out < 1) {
+        cout << "Must be at least 1 output, enter again: " << endl;
+        set_num_out ();
+    }
 
     num_out_ = num_out + 1;     // add bias unit
 }
@@ -61,4 +71,21 @@ void BNN::initialize () {
     set_num_layers ();
     set_layers ();
 
+}
+
+void BNN::print_layers () {
+
+    cout << "Units per layer (including bias unit): " << endl;
+    for (unsigned i = 0; i < layers_.size(); i++) {
+        
+        if (i == 0)
+            cout << "[In]: " << layers_[i] << endl;
+
+        else if (i == layers_.size() - 1) 
+            cout << "[Out]: " << layers_[i] << endl;
+
+        else
+            cout << "[" << i << "]: " << layers_[i] << endl;
+
+    }
 }

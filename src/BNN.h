@@ -28,6 +28,8 @@ class BNN {
 
         void initialize ();     // initialize variables;
 
+        void print_layers ();   // print number of units per layer vector
+
 
         unsigned unroll (unsigned i, unsigned j, unsigned cols);
         Matrix matmul (Matrix a, Matrix b);     // multiply two matrices
