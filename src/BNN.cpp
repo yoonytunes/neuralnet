@@ -65,6 +65,40 @@ void BNN::set_layers () {
     }
 }
 
+void BNN::set_weights () {
+
+    unsigned weights_dim = num_hidden_ + 1;
+    weights_.resize(weights_dim);
+
+    for (unsigned i = 0; i < weights_.size(); i++) {
+
+        unsigned r = layers_[i+1];
+        unsigned c = layers_[i];
+
+        vector<vector<float>> temp;
+
+        temp.resize(r);
+        for (unsigned j = 0; j < r; j++) {
+            temp[j].resize(c, 0);
+        }
+
+        for (unsigned m = 0; m < r; m++) {
+            for (unsigned n = 0; n < c; n++) {
+
+                if (m == 0)
+                    temp[m][n] = 0;
+                
+                else 
+                    temp[m][n] = (rand() % 60) - 30;
+            }
+        }
+
+        weights_[i] = Matrix (temp);
+
+    }
+
+}
+
 void BNN::build_network () {
 
     
@@ -72,7 +106,7 @@ void BNN::build_network () {
     set_num_out ();
     set_num_layers ();
     set_layers ();
-    // set weights
+    set_weights ();
     // set inputs
 
     cout << "Building Neural Network";
@@ -98,6 +132,7 @@ void BNN::build_network () {
 void BNN::print_layers () {
 
     cout << "Units per layer (including bias unit): " << endl;
+
     for (unsigned i = 0; i < layers_.size(); i++) {
         
         if (i == 0)
@@ -109,5 +144,18 @@ void BNN::print_layers () {
         else
             cout << "[" << i << "]: " << layers_[i] << endl;
 
+    }
+
+    cout << endl;
+}
+
+void BNN::print_weights () {
+
+    cout << "Weights Matrices: " << endl;
+
+    for (unsigned i = 0; i < weights_.size(); i++) {
+
+        weights_[i].print_mat();
+        cout << endl;
     }
 }
