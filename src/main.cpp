@@ -3,6 +3,6 @@
 int main () {
 
     BNN bnn;
-    bnn.initialize();
+    bnn.build_network();
     bnn.print_layers();
 }

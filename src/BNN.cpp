@@ -1,4 +1,5 @@
 #include "BNN.h"
+#include <unistd.h>
 
 BNN::BNN () {}
 
@@ -64,12 +65,33 @@ void BNN::set_layers () {
     }
 }
 
-void BNN::initialize () {
+void BNN::build_network () {
 
+    
     set_num_in ();
     set_num_out ();
     set_num_layers ();
     set_layers ();
+    // set weights
+    // set inputs
+
+    cout << "Building Neural Network";
+    cout.flush();
+    sleep (1);
+
+    for (unsigned i = 0; i < 3; i++) {
+        cout << ".";
+        cout.flush();
+        sleep (1);
+    }
+    
+    cout << endl;
+    cout << "Build finished." << endl;
+    cout.flush();
+    sleep (1);
+    cout << endl;
+
+
 
 }
 
