@@ -99,15 +99,50 @@ void BNN::set_weights () {
 
 }
 
+void BNN::set_inputs () {
+
+    cout << "Dataset to use: " << endl;
+    string dset, filename;
+    cin >> dset;
+
+    cout << endl;
+
+    filename = "../data/dataset" + dset + ".txt";
+
+    cout << "Accessing data from " << filename;
+
+    for (unsigned i = 0; i < 3; i++) {
+        cout << ".";
+        cout.flush();
+        sleep(1);
+    }
+
+    cout << endl;
+
+    Matrix m;
+    m.load_mat (filename);      // initial inputs will have bias unit for now
+
+    cout << endl;
+
+    inputs_.resize (layers_.size()-1);
+    inputs_[0] = m;
+
+    for (unsigned j = 1; j < inputs_.size(); j++) {
+
+        inputs_[j] = Matrix(layers_[j], 1);
+        inputs_[j].set_bias();
+    }
+
+}
+
 void BNN::build_network () {
 
-    
     set_num_in ();
     set_num_out ();
     set_num_layers ();
     set_layers ();
     set_weights ();
-    // set inputs
+    set_inputs ();
 
     cout << "Building Neural Network";
     cout.flush();
@@ -156,6 +191,17 @@ void BNN::print_weights () {
     for (unsigned i = 0; i < weights_.size(); i++) {
 
         weights_[i].print_mat();
+        cout << endl;
+    }
+}
+
+void BNN::print_inputs () {
+
+    cout << "Inputs Matrices: " << endl;
+
+    for (unsigned i = 0; i < inputs_.size(); i++) {
+
+        inputs_[i].print_mat();
         cout << endl;
     }
 }

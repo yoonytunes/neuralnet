@@ -26,9 +26,11 @@ class BNN {
         void set_num_layers ();      // sets num hidden
         void set_layers ();
         void set_weights ();
+        void set_inputs ();
 
         void print_layers ();   // print number of units per layer vector
         void print_weights ();  // print weights matrices
+        void print_inputs ();   // print inputs to each layer
 
 
         unsigned unroll (unsigned i, unsigned j, unsigned cols);

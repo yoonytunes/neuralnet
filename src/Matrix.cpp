@@ -135,6 +135,11 @@ bool Matrix::load_mat (string filename) {
     return true;
 }
 
+void Matrix::set_bias () {
+
+    matrix_[0][0] = 1;
+}
+
 Matrix Matrix::operator+ (Matrix const &other) {
 
     Matrix result (this->rows_, this->cols_);
@@ -159,6 +164,67 @@ Matrix Matrix::operator+ (Matrix const &other) {
         for (unsigned j = 0; j < this->cols_; j++) {
 
             result.matrix_[i][j] += this->matrix_[i][j] + other.matrix_[i][j];
+
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::operator- (Matrix const &other) {
+
+    Matrix result (this->rows_, this->cols_);
+    result.matrix_.resize (this->rows_);
+
+    for (unsigned i = 0; i < this->rows_; i++) {
+        result.matrix_[i].resize (this->cols_, 0);
+    }
+
+    if (this->rows_ != other.rows_ || this->cols_ != other.cols_) {
+
+        cout << "Invalid dimensions: " << endl;
+        cout << "Got " << other.cols_ << " x " << other.rows_ << endl;
+        cout << "Expected " << this->cols_ << " x " << this->cols_ << endl;
+
+        return result;
+    
+    }
+
+    for (unsigned i = 0; i < this->rows_; i++) {
+
+        for (unsigned j = 0; j < this->cols_; j++) {
+
+            result.matrix_[i][j] += this->matrix_[i][j] - other.matrix_[i][j];
+
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::operator* (Matrix const &other) {
+
+    Matrix result (this->rows_, other.cols_);
+    result.matrix_.resize (this->rows_);
+
+    for (unsigned i = 0; i < this->rows_; i++) {
+        result.matrix_[i].resize(other.cols_, 0);
+    }
+
+    if (this->cols_ != other.rows_) {
+
+        cout << "Invalid dimensions: " << endl;
+        cout << "Number of columns of first matrix does not match number of rows of second matrix" << endl;
+
+        return result;
+    }
+
+    for (unsigned m = 0; m < this->rows_; m++) {
+        for (unsigned n = 0; n < other.cols_; n++) {
+            for (unsigned k = 0; k < other.rows_; k++) {
+
+                result.matrix_[m][n] += this->matrix_[m][k] * other.matrix_[k][n];
+            }
 
         }
     }

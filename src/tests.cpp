@@ -100,13 +100,14 @@ int main () {
     b.print_mat();
     cout << endl;
 
-    c = a + b;
-    cout << endl;
-    c.print_mat();
+    a.transpose();
+    a.print_mat();
+
     cout << endl;
 
-    c.transpose();
+    c = a * b;
     c.print_mat();
+
 
 
 

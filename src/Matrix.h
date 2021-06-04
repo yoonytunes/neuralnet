@@ -23,7 +23,11 @@ class Matrix {
         void print_mat ();
         bool load_mat (string filename);
 
+        void set_bias ();
+
         Matrix operator+ (Matrix const &other);
+        Matrix operator- (Matrix const &other);
+        Matrix operator* (Matrix const &other);
     
     private:
 
