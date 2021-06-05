@@ -9,6 +9,8 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+float sigmoid (float z);   // sigmoid function
+
 class BNN {
 
 
@@ -27,10 +29,13 @@ class BNN {
         void set_layers ();
         void set_weights ();
         void set_inputs ();
+        void set_z ();
 
         void print_layers ();   // print number of units per layer vector
         void print_weights ();  // print weights matrices
         void print_inputs ();   // print inputs to each layer
+        void print_z ();        // print inputs to sigmoid 
+        void print_outputs ();  // print outputs
 
 
         unsigned unroll (unsigned i, unsigned j, unsigned cols);
@@ -40,11 +45,14 @@ class BNN {
     private:
 
         vector<Matrix> weights_;      // inner vector contains matrix objects
+        Matrix outputs_;        // outputs to neural network
         vector<Matrix> inputs_;    // column matrices for inputs per layer
         vector<unsigned> layers_;            // keeps track of number of units per layer
         unsigned num_in_;                // number of inputs (with bias unit)
         unsigned num_out_;               // number of outputs (with bias unit)
         unsigned num_hidden_;           // number of hiddenlayers in architecture
+        vector<Matrix> z_;          // vector containing pre-sigmoid output matrix for each layer
+
 
         
 

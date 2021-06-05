@@ -1,7 +1,29 @@
 #include "BNN.h"
 #include <unistd.h>
+#include <cmath>
+#include <assert.h>
 
 BNN::BNN () {}
+
+void BNN::fwd_prop () {
+
+    assert (weights_.size() == inputs_.size());
+
+    for (unsigned i = 0; i < weights_.size(); i++) {
+
+        z_[i] = weights_[i] * inputs_[i];
+
+        if (i == weights_.size() - 1) {
+
+            outputs_ = z_[i].to_sigmoid();
+        }
+
+        else {
+
+            inputs_[i+1] = z_[i].to_sigmoid();
+        }
+    }
+}
 
 void BNN::set_num_in () {
 
@@ -135,6 +157,25 @@ void BNN::set_inputs () {
 
 }
 
+void BNN::set_z () {
+
+    cout << "Initializing sigmoid input matrices";
+
+    for (unsigned i = 0; i < 3; i++) {
+
+        cout << ".";
+        cout.flush();
+        sleep(1);
+    }
+
+    cout << endl;
+
+    z_.resize (num_hidden_ + 1, Matrix (1,1));
+
+    cout << endl;
+}
+
+
 void BNN::build_network () {
 
     set_num_in ();
@@ -143,6 +184,8 @@ void BNN::build_network () {
     set_layers ();
     set_weights ();
     set_inputs ();
+    set_z ();
+
 
     cout << "Building Neural Network";
     cout.flush();
@@ -190,6 +233,7 @@ void BNN::print_weights () {
 
     for (unsigned i = 0; i < weights_.size(); i++) {
 
+        cout << "[" << i << "]: ";
         weights_[i].print_mat();
         cout << endl;
     }
@@ -201,7 +245,29 @@ void BNN::print_inputs () {
 
     for (unsigned i = 0; i < inputs_.size(); i++) {
 
+        cout << "[" << i << "]: ";
         inputs_[i].print_mat();
         cout << endl;
     }
+}
+
+void BNN::print_z () {
+
+    cout << "Input Matrices to sigmoid: " << endl;
+
+    for (unsigned i = 0; i < z_.size(); i++) {
+
+        cout << "[" << i << "]: ";
+        z_[i].print_mat();
+        cout << endl;
+    }
+}
+
+void BNN::print_outputs () {
+
+    
+    cout << "Output Matrix: " << endl;
+    cout << "[0]: ";
+    outputs_.print_mat();
+
 }

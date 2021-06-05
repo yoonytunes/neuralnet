@@ -1,7 +1,16 @@
 #include "Matrix.h"
+#include <cmath>
 
 using std::cout;
 using std::endl;
+
+float sigmoid (float z) {
+
+    float g = exp (-z) + 1;
+    g = 1/g;
+    
+    return g;
+}
 
 Matrix::Matrix () {
 
@@ -26,7 +35,21 @@ Matrix::Matrix (vector<vector<float>> matrix) {
     cols_ = matrix[0].size();
 }
 
+Matrix Matrix::to_sigmoid () {
 
+    Matrix result (this->rows_, this->cols_);
+
+    for (unsigned i = 0; i < this->rows_; i++) {
+        for (unsigned j = 0; j < this->cols_; j++) {
+
+            result.matrix_[i][j] = sigmoid(this->matrix_[i][j]);
+        }
+    }
+
+    result.set_bias();      // make sure first unit is still 1 for bias unit
+
+    return result;
+}
 
 unsigned Matrix::get_rows () {
 
@@ -69,7 +92,13 @@ void Matrix::print_mat () {
     for (unsigned i = 0; i < rows_; i++) {
         for (unsigned j = 0; j < cols_; j++) {
 
+            if (i != 0 && j == 0) {
+
+                cout << "     ";
+            }
+
             cout << matrix_[i][j] << " ";
+
 
         }
 
@@ -139,6 +168,8 @@ void Matrix::set_bias () {
 
     matrix_[0][0] = 1;
 }
+
+
 
 Matrix Matrix::operator+ (Matrix const &other) {
 

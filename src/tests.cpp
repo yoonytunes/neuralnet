@@ -108,7 +108,13 @@ int main () {
     c = a * b;
     c.print_mat();
 
+    cout << endl;
+    
+    cout << "sigmoid(-3): " << sigmoid(-3) << endl;
+    cout << "sigmoid(0): " << sigmoid(0) << endl;
+    cout << "sigmoid(2): " << sigmoid(2) << endl;
+    cout << "sigmoid(1.24): " << sigmoid (1.24) << endl;
 
-
+    cout << endl;
 
 }

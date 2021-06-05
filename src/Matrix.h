@@ -8,6 +8,8 @@
 using std::string;
 using std::vector;
 
+float sigmoid (float z);   // sigmoid function
+
 class Matrix {
 
     public:
@@ -24,6 +26,8 @@ class Matrix {
         bool load_mat (string filename);
 
         void set_bias ();
+
+        Matrix to_sigmoid ();
 
         Matrix operator+ (Matrix const &other);
         Matrix operator- (Matrix const &other);
