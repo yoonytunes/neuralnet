@@ -25,37 +25,85 @@ void BNN::fwd_prop () {
     }
 }
 
+void BNN::bck_prop () {
+
+    calculate_error();
+}
+
+void BNN::calculate_error () {
+
+    error_ = expected_ - outputs_;
+
+}
+
 void BNN::set_num_in () {
 
-    unsigned num_in;
+    cout << "Dataset to use: " << endl;
+    string dset, filename;
+    cin >> dset;
 
-    cout << "Number of input units: " << endl;
-    cin >> num_in;
+    dset_ = dset;
+    
     cout << endl;
+
+    filename = "../data/dataset" + dset + ".txt";
+    filename_ = filename;
+
+    cout << "Accessing data from " << filename;
+
+    for (unsigned i = 0; i < 3; i++) {
+        cout << ".";
+        cout.flush();
+        sleep(1);
+    }
+
+
+    Matrix m;
+    m.load_mat(filename_);
+
+    unsigned num_in = m.get_rows();
+
+    cout << "Number of input units: " << num_in << endl;
+   
 
     if (num_in < 1) {
         cout << "Must be at least 1 input, enter again: " << endl;
         set_num_in ();
     }
 
-    num_in_ = num_in + 1;       // add bias unit
+    num_in_ = num_in;       // add bias unit
 }
 
 void BNN::set_num_out() {
-    
-    unsigned num_out;
 
-    cout << "Number of output units: " << endl;
-    cin >> num_out;
+    string filename;
+
+    filename = "../data/expected" + dset_ + ".txt";
+
+    expected_.load_mat(filename);
+
+    num_out_ = expected_.get_rows();
+
+    cout << "Accessing data from " << filename;
+
+    for (unsigned i = 0; i < 3; i++) {
+        cout << ".";
+        cout.flush();
+        sleep(1);
+    }
+    
+    cout << endl;
+    
+    cout << "Number of output units: " << num_out_ << endl;
+
     cout << endl;
 
-    if (num_out < 1) {
+    if (num_out_ < 1) {
         cout << "Must be at least 1 output, enter again: " << endl;
         set_num_out ();
     }
-
-    num_out_ = num_out + 1;     // add bias unit
 }
+
 
 void BNN::set_num_layers () {
     
@@ -81,7 +129,6 @@ void BNN::set_layers () {
         cout << "Number of units for hidden layer " << i << ": " << endl;
         cin >> n;
         n += 1;
-        cout << endl;
 
         layers_[i] = n;
     }
@@ -111,7 +158,7 @@ void BNN::set_weights () {
                     temp[m][n] = 0;
                 
                 else 
-                    temp[m][n] = (rand() % 60) - 30;
+                    temp[m][n] = ((rand() % 200) - 100) / 100.0;
             }
         }
 
@@ -123,30 +170,11 @@ void BNN::set_weights () {
 
 void BNN::set_inputs () {
 
-    cout << "Dataset to use: " << endl;
-    string dset, filename;
-    cin >> dset;
-
-    cout << endl;
-
-    filename = "../data/dataset" + dset + ".txt";
-
-    cout << "Accessing data from " << filename;
-
-    for (unsigned i = 0; i < 3; i++) {
-        cout << ".";
-        cout.flush();
-        sleep(1);
-    }
-
-    cout << endl;
 
     Matrix m;
-    m.load_mat (filename);      // initial inputs will have bias unit for now
+    m.load_mat (filename_);      // initial inputs will have bias unit for now
 
-    cout << endl;
-
-    inputs_.resize (layers_.size()-1);
+    inputs_.resize (num_hidden_ + 1);
     inputs_[0] = m;
 
     for (unsigned j = 1; j < inputs_.size(); j++) {
@@ -261,6 +289,7 @@ void BNN::print_z () {
         z_[i].print_mat();
         cout << endl;
     }
+
 }
 
 void BNN::print_outputs () {
@@ -269,5 +298,24 @@ void BNN::print_outputs () {
     cout << "Output Matrix: " << endl;
     cout << "[0]: ";
     outputs_.print_mat();
+    cout << endl;
 
+}
+
+void BNN::print_expected () {
+
+    cout << "Expected Matrix: " << endl;
+    cout << "[0]: ";
+    expected_.print_mat();
+    cout << endl;
+
+}
+
+void BNN::print_error () {
+
+    cout << "Error Matrix: " << endl;
+    cout << "[0]: ";
+    error_.print_mat();
+    cout << endl;
+    
 }

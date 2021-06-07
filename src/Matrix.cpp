@@ -131,8 +131,8 @@ bool Matrix::load_mat (string filename) {
         line = line.substr (line.find (' ') + 1, line.size());
     }
 
-    cout << "Rows: " << row << endl;
-    cout << "Columns: " << col << endl;
+    // cout << "Rows: " << row << endl;
+    // cout << "Columns: " << col << endl;
 
     matrix_.resize (row);
 
@@ -140,7 +140,9 @@ bool Matrix::load_mat (string filename) {
         matrix_[i].resize(col, 0);
     } 
 
-    cout << "Matrix Size: " << matrix_.size() * matrix_[0].size() << endl;
+    // cout << "Matrix Size: " << matrix_.size() * matrix_[0].size() << endl;
+
+    cout << endl;
 
     unsigned idx = 0;
 
