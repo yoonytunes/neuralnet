@@ -1,1 +1,1 @@
-# Binary Neural Network
+# Neural Network
