@@ -41,7 +41,8 @@ class BNN {
         void print_expected ();
         void print_error ();
         
-        void calculate_error ();
+        void init_error();      // initialize error vector matrices
+        void calculate_error ();    // calculate error for output term
 
 
         unsigned unroll (unsigned i, unsigned j, unsigned cols);
@@ -55,7 +56,7 @@ class BNN {
         Matrix expected_;       // matrix of expected outputs
         vector<Matrix> inputs_;    // column matrices for inputs per layer
         vector<unsigned> layers_;            // keeps track of number of units per layer
-        Matrix error_;              // error of output vs actual
+        vector<Matrix> error_;              // error of output vs actual
         unsigned num_in_;                // number of inputs (with bias unit)
         unsigned num_out_;               // number of outputs (with bias unit)
         unsigned num_hidden_;           // number of hiddenlayers in architecture

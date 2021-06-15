@@ -27,13 +27,37 @@ void BNN::fwd_prop () {
 
 void BNN::bck_prop () {
 
-    calculate_error();
+    init_error();
+
+    // calculate_error();
 }
 
-void BNN::calculate_error () {
+// void BNN::calculate_error () {
 
-    error_ = expected_ - outputs_;
+//     error_ = expected_ - outputs_;
 
+// }
+
+void BNN::init_error () {
+
+    error_.resize(inputs_.size());
+    unsigned r, c;
+
+    for (unsigned i = 0; i < error_.size(); i++) {
+
+        if (i == error_.size()-1) {
+            r = outputs_.get_rows();
+            c = outputs_.get_cols();
+        }
+
+        else {
+
+            r = inputs_[i+1].get_rows();
+            c = inputs_[i+1].get_cols();
+        }
+
+        error_[i] = Matrix (r, c);
+    }
 }
 
 void BNN::set_num_in () {
@@ -314,8 +338,12 @@ void BNN::print_expected () {
 void BNN::print_error () {
 
     cout << "Error Matrix: " << endl;
-    cout << "[0]: ";
-    error_.print_mat();
-    cout << endl;
+
+    for (unsigned i = 0; i < error_.size(); i++) {
+
+        cout << "[" << i << "]: ";
+        error_[i].print_mat();
+        cout << endl;
+    }
     
 }
