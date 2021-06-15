@@ -9,6 +9,7 @@ using std::string;
 using std::vector;
 
 float sigmoid (float z);   // sigmoid function
+float sigmoid_prime (float z);  // sigmoid derivative function
 
 class Matrix {
 
@@ -21,13 +22,14 @@ class Matrix {
         unsigned get_rows ();
         unsigned get_cols ();
 
-        void transpose ();
+        Matrix transpose ();
         void print_mat ();
         bool load_mat (string filename);
 
         void set_bias ();
 
         Matrix to_sigmoid ();
+        Matrix to_sigmoid_prime ();
 
         Matrix operator+ (Matrix const &other);
         Matrix operator- (Matrix const &other);

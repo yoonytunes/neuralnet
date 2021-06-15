@@ -12,6 +12,11 @@ float sigmoid (float z) {
     return g;
 }
 
+float sigmoid_prime (float z) {
+
+    return sigmoid (z) * (1 - sigmoid(z));
+}
+
 Matrix::Matrix () {
 
 }
@@ -51,6 +56,22 @@ Matrix Matrix::to_sigmoid () {
     return result;
 }
 
+Matrix Matrix::to_sigmoid_prime () {
+
+    Matrix result (this->rows_, this->cols_);
+
+    for (unsigned i = 0; i < this->rows_; i++) {
+        for (unsigned j = 0; j < this->cols_; j++) {
+
+            result.matrix_[i][j] = sigmoid_prime (this->matrix_[i][j]);
+        }
+    }
+
+    result.set_bias();
+
+    return result;
+}
+
 unsigned Matrix::get_rows () {
 
     return rows_;
@@ -61,30 +82,33 @@ unsigned Matrix::get_cols () {
     return cols_;
 }
 
-void Matrix::transpose () {
+Matrix Matrix::transpose () {
 
     vector<vector<float>> temp_mat;
     unsigned temp;
+    unsigned r, c;
 
-    temp_mat = matrix_;     // copy old matrix
+    r = cols_;
+    c = rows_;
 
-    temp = rows_;       // switch rows and columns
-    rows_ = cols_;
-    cols_ = temp;
+    temp_mat.resize (r);
 
-    matrix_.resize (rows_);
-
-    for (unsigned i = 0; i < rows_; i++) {
-        matrix_[i].resize(cols_, 0);
+    for (unsigned i = 0; i < r; i++) {
+        temp_mat[i].resize(c, 0);
     }
 
-    for (unsigned i = 0; i < rows_; i++) {      // copy old matrix into new
-        for (unsigned j = 0; j < cols_; j++) {
+    for (unsigned i = 0; i < r; i++) {      // copy old matrix into new
+        for (unsigned j = 0; j < c; j++) {
 
-            matrix_[i][j] = temp_mat[j][i];
+            temp_mat[i][j] = matrix_[j][i];
         }
     }
- 
+
+    Matrix m;
+    
+    m = Matrix(temp_mat);
+
+    return m;
 }
 
 void Matrix::print_mat () {
@@ -92,14 +116,7 @@ void Matrix::print_mat () {
     for (unsigned i = 0; i < rows_; i++) {
         for (unsigned j = 0; j < cols_; j++) {
 
-            if (i != 0 && j == 0) {
-
-                cout << "     ";
-            }
-
             cout << matrix_[i][j] << " ";
-
-
         }
 
         cout << endl;
@@ -141,8 +158,6 @@ bool Matrix::load_mat (string filename) {
     } 
 
     // cout << "Matrix Size: " << matrix_.size() * matrix_[0].size() << endl;
-
-    cout << endl;
 
     unsigned idx = 0;
 

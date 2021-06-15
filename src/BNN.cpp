@@ -285,7 +285,6 @@ void BNN::print_weights () {
 
     for (unsigned i = 0; i < weights_.size(); i++) {
 
-        cout << "[" << i << "]: ";
         weights_[i].print_mat();
         cout << endl;
     }
@@ -297,7 +296,6 @@ void BNN::print_inputs () {
 
     for (unsigned i = 0; i < inputs_.size(); i++) {
 
-        cout << "[" << i << "]: ";
         inputs_[i].print_mat();
         cout << endl;
     }
@@ -309,7 +307,6 @@ void BNN::print_z () {
 
     for (unsigned i = 0; i < z_.size(); i++) {
 
-        cout << "[" << i << "]: ";
         z_[i].print_mat();
         cout << endl;
     }
@@ -320,7 +317,6 @@ void BNN::print_outputs () {
 
     
     cout << "Output Matrix: " << endl;
-    cout << "[0]: ";
     outputs_.print_mat();
     cout << endl;
 
@@ -329,7 +325,6 @@ void BNN::print_outputs () {
 void BNN::print_expected () {
 
     cout << "Expected Matrix: " << endl;
-    cout << "[0]: ";
     expected_.print_mat();
     cout << endl;
 
@@ -337,11 +332,10 @@ void BNN::print_expected () {
 
 void BNN::print_error () {
 
-    cout << "Error Matrix: " << endl;
+    cout << "Error Matrices: " << endl;
 
     for (unsigned i = 0; i < error_.size(); i++) {
 
-        cout << "[" << i << "]: ";
         error_[i].print_mat();
         cout << endl;
     }

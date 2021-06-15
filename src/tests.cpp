@@ -93,28 +93,23 @@ int main () {
     a.load_mat ("../test_data/matA.txt");
     cout << endl;
     a.print_mat();
-    cout << endl;
 
     b.load_mat ("../test_data/matB.txt");
     cout << endl;
     b.print_mat();
-    cout << endl;
-
-    a.transpose();
-    a.print_mat();
 
     cout << endl;
-
-    c = a * b;
+    c = a.to_sigmoid ();
     c.print_mat();
 
     cout << endl;
     
-    cout << "sigmoid(-3): " << sigmoid(-3) << endl;
-    cout << "sigmoid(0): " << sigmoid(0) << endl;
-    cout << "sigmoid(2): " << sigmoid(2) << endl;
-    cout << "sigmoid(1.24): " << sigmoid (1.24) << endl;
+    c = a.to_sigmoid_prime ();
+    c.print_mat ();
 
-    cout << endl;
+
+
+
+    
 
 }

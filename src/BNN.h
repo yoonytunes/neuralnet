@@ -44,6 +44,9 @@ class BNN {
         void init_error();      // initialize error vector matrices
         void calculate_error ();    // calculate error for output term
 
+        float cost ();
+        
+
 
         unsigned unroll (unsigned i, unsigned j, unsigned cols);
         Matrix matmul (Matrix a, Matrix b);     // multiply two matrices
