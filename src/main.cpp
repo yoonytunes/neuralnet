@@ -9,7 +9,7 @@ int main () {
     bnn.bck_prop();
 
     // bnn.print_layers();
-    // bnn.print_weights();
+    bnn.print_weights();
     bnn.print_inputs ();
     // bnn.print_z ();
     bnn.print_outputs();

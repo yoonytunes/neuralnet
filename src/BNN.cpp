@@ -29,14 +29,31 @@ void BNN::bck_prop () {
 
     init_error();
 
-    // calculate_error();
+    calculate_error();
 }
 
-// void BNN::calculate_error () {
+void BNN::calculate_error () {
 
-//     error_ = expected_ - outputs_;
+    for (unsigned i = error_.size() - 1; i >= 0; i++) {
 
-// }
+        if (i == error_.size() - 1) {
+
+            error_[i] = outputs_ - expected_;   // last layer loss
+
+        }
+
+        else {
+
+            Matrix theta;
+            theta = weights_[i].transpose();
+            error_[i] = theta * error_[i+1];        // TODO: make sure add elementwise operator (.*) to matrix class
+        }
+
+    }
+
+
+    
+}
 
 void BNN::init_error () {
 
@@ -60,6 +77,8 @@ void BNN::init_error () {
     }
 }
 
+
+
 void BNN::set_num_in () {
 
     cout << "Dataset to use: " << endl;
@@ -81,6 +100,7 @@ void BNN::set_num_in () {
         sleep(1);
     }
 
+    cout << endl;
 
     Matrix m;
     m.load_mat(filename_);
@@ -102,7 +122,7 @@ void BNN::set_num_out() {
 
     string filename;
 
-    filename = "../data/expected" + dset_ + ".txt";
+    filename = "../data/expected" + dset_ + ".txt";         // set expected
 
     expected_.load_mat(filename);
 
