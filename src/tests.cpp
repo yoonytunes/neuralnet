@@ -99,13 +99,11 @@ int main () {
     b.print_mat();
 
     cout << endl;
-    c = a.to_sigmoid ();
-    c.print_mat();
-
-    cout << endl;
     
-    c = a.to_sigmoid_prime ();
+    c = a.elemwise_mult (b);
+
     c.print_mat ();
+    
 
 
 

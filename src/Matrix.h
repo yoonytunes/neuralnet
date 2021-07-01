@@ -30,10 +30,12 @@ class Matrix {
 
         Matrix to_sigmoid ();
         Matrix to_sigmoid_prime ();
+        Matrix elemwise_mult (Matrix const &other);
 
         Matrix operator+ (Matrix const &other);
         Matrix operator- (Matrix const &other);
         Matrix operator* (Matrix const &other);
+        
     
     private:
 

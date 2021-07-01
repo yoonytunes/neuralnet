@@ -34,7 +34,10 @@ void BNN::bck_prop () {
 
 void BNN::calculate_error () {
 
-    for (unsigned i = error_.size() - 1; i >= 0; i++) {
+    unsigned n = error_.size() - 1;
+    cout << n << endl;
+
+    for (int i = n; i >= 0; i--) {
 
         if (i == error_.size() - 1) {
 
@@ -44,14 +47,14 @@ void BNN::calculate_error () {
 
         else {
 
-            Matrix theta;
-            theta = weights_[i].transpose();
-            error_[i] = theta * error_[i+1];        // TODO: make sure add elementwise operator (.*) to matrix class
+            Matrix theta, temp;
+            theta = weights_[i+1].transpose();
+            temp = (theta * error_[i+1]) ; 
+            error_[i] = temp.elemwise_mult(inputs_[i+1].to_sigmoid_prime ());        
+
         }
 
     }
-
-
     
 }
 

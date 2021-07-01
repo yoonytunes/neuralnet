@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <cmath>
+#include <assert.h>
 
 using std::cout;
 using std::endl;
@@ -273,6 +274,29 @@ Matrix Matrix::operator* (Matrix const &other) {
 
                 result.matrix_[m][n] += this->matrix_[m][k] * other.matrix_[k][n];
             }
+
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::elemwise_mult (Matrix const &other) {
+
+    assert (this->rows_ == other.rows_ && this->cols_ == other.cols_);
+
+    Matrix result (this->rows_, this->cols_);
+
+    result.matrix_.resize (this->rows_);
+
+    for (unsigned i = 0; i < this->rows_; i++) {
+        result.matrix_[i].resize(other.cols_, 0);
+    }
+
+    for (unsigned r = 0; r < result.rows_; r++) {
+        for (unsigned c = 0; c < result.cols_; c++) {
+
+            result.matrix_[r][c] = this->matrix_[r][c] * other.matrix_[r][c];
 
         }
     }
