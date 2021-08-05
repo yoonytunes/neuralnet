@@ -1,5 +1,5 @@
-#include "BNN.h"
-#include "Matrix.h"
+#include "../include/BNN.h"
+#include "../include/Matrix.h"
 
 #include <iostream>
 #include <vector>

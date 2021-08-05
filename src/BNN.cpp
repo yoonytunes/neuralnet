@@ -1,4 +1,4 @@
-#include "BNN.h"
+#include "../include/BNN.h"
 #include <unistd.h>
 #include <cmath>
 #include <assert.h>

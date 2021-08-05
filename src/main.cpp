@@ -1,4 +1,4 @@
-#include "BNN.h"
+#include "../include/BNN.h"
 
 int main () {
 
