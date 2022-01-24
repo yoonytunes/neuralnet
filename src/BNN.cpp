@@ -92,7 +92,7 @@ void BNN::set_num_in () {
     
     cout << endl;
 
-    filename = "../data/dataset" + dset + ".txt";
+    filename = "data/dataset" + dset + ".txt";
     filename_ = filename;
 
     cout << "Accessing data from " << filename;
@@ -125,7 +125,7 @@ void BNN::set_num_out() {
 
     string filename;
 
-    filename = "../data/expected" + dset_ + ".txt";         // set expected
+    filename = "data/expected" + dset_ + ".txt";         // set expected
 
     expected_.load_mat(filename);
 

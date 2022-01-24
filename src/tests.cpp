@@ -90,11 +90,11 @@ int main () {
 
     Matrix a, b, c;
 
-    a.load_mat ("../test_data/matA.txt");
+    a.load_mat ("test_data/matA.txt");
     cout << endl;
     a.print_mat();
 
-    b.load_mat ("../test_data/matB.txt");
+    b.load_mat ("test_data/matB.txt");
     cout << endl;
     b.print_mat();
 

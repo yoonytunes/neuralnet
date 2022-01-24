@@ -17,7 +17,7 @@ tests.o : ./src/tests.cpp
 	clang++ -c ./src/tests.cpp
 
 clean : 
-	rm run test *.o
+	rm run test *.o ./src/*.o
 
 
 
