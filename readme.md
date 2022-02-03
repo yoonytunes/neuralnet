@@ -1,4 +1,4 @@
-# Neural Network in CPP
+# Neural Network in C++
 
 MLP Neural Networks today have applications in many different fields such as image processing, data analytics, circuit design, etc. Although all similar in theory, these neural nets all differ slightly due to their technical needs; some networks may only need 2 layers while others require 4 for optimized results; some neural nets may need a ReLU activation instead of a sigmoid. 
 
