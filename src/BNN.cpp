@@ -191,7 +191,7 @@ void BNN::set_weights () {
         unsigned r = layers_[i+1];
         unsigned c = layers_[i];
 
-        vector<vector<float>> temp;
+        vector<vector<float> > temp;
 
         temp.resize(r);
         for (unsigned j = 0; j < r; j++) {

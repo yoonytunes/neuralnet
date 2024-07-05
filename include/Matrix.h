@@ -17,7 +17,7 @@ class Matrix {
 
         Matrix ();
         Matrix (unsigned rows, unsigned cols);
-        Matrix (vector<vector<float>> matrix);
+        Matrix (vector<vector<float> > matrix);
 
         unsigned get_rows ();
         unsigned get_cols ();
@@ -41,6 +41,6 @@ class Matrix {
 
         unsigned rows_;
         unsigned cols_;
-        vector<vector<float>> matrix_;
+        vector<vector<float> > matrix_;
     
 };

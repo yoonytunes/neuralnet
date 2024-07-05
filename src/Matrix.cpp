@@ -33,7 +33,7 @@ Matrix::Matrix (unsigned rows, unsigned cols) {
     }
 }
 
-Matrix::Matrix (vector<vector<float>> matrix) {
+Matrix::Matrix (vector<vector<float> > matrix) {
 
     matrix_ = matrix;
 
@@ -85,7 +85,7 @@ unsigned Matrix::get_cols () {
 
 Matrix Matrix::transpose () {
 
-    vector<vector<float>> temp_mat;
+    vector<vector<float> > temp_mat;
     unsigned temp;
     unsigned r, c;
 
